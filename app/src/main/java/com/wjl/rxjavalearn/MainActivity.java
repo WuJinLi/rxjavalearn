@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.wjl.rxjavalearn.polling.RxjavaPollingLearn;
 import com.wjl.rxjavalearn.simpletouse.SimpleToUseRxjava;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initViewsAndActions() {
         findViewById(R.id.btn_simple_to_use).setOnClickListener(this);
+        findViewById(R.id.btn_polling).setOnClickListener(this);
     }
 
     @Override
@@ -26,6 +28,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_simple_to_use:
 //                SimpleToUseRxjava.simpleToUseRxjava();
                 SimpleToUseRxjava.chainCalls();
+                break;
+            case R.id.btn_polling:
+//                RxjavaPollingLearn.unconditionalPolling();
+                RxjavaPollingLearn.conditionalPolling();
                 break;
             default:
                 break;
