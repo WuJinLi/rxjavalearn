@@ -12,7 +12,8 @@ import com.wjl.rxjavalearn.polling.RxjavaPollingLearn;
 import com.wjl.rxjavalearn.retrywhen.RxjavaRetryWhenLearn;
 import com.wjl.rxjavalearn.simpletouse.SimpleToUseRxjava;
 
-import flatmap.EventsNested;
+import com.wjl.rxjavalearn.flatmap.EventsNested;
+import com.wjl.rxjavalearn.threadchange.ThreadExchangeByRxjava;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btn_events_nested).setOnClickListener(this);
         findViewById(R.id.btn_merge_data).setOnClickListener(this);
         findViewById(R.id.btn_combine).setOnClickListener(this);
+        findViewById(R.id.btn_thread_exchange).setOnClickListener(this);
     }
 
     @Override
@@ -58,6 +60,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_combine:
                 startActivity(new Intent(MainActivity.this, RxjavaCombineLatestActivity.class));
+                break;
+
+            case R.id.btn_thread_exchange:
+                ThreadExchangeByRxjava.threadExchangeofDefaulThreadIn();
                 break;
             default:
                 break;

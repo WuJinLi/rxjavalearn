@@ -1,4 +1,4 @@
-package flatmap;
+package com.wjl.rxjavalearn.flatmap;
 
 import com.wjl.rxjavalearn.bean.LoginBean;
 import com.wjl.rxjavalearn.bean.RegisterBean;
@@ -8,6 +8,7 @@ import com.wjl.rxjavalearn.network.RetrofitUtils;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -19,8 +20,13 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class EventsNested {
     public static void eventsNested() {
+
         Observable registerObservable = RetrofitUtils.getInstance().getService().register();
         final Observable loginObservable = RetrofitUtils.getInstance().getService().login();
+
+
+        CompositeDisposable compositeDisposable=new CompositeDisposable();
+        compositeDisposable.clear();
 
 
         registerObservable
