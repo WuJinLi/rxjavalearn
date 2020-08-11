@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.wjl.rxjavalearn.mergedatas.MergeMoreData;
 import com.wjl.rxjavalearn.polling.RxjavaPollingLearn;
 import com.wjl.rxjavalearn.retrywhen.RxjavaRetryWhenLearn;
 import com.wjl.rxjavalearn.simpletouse.SimpleToUseRxjava;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btn_polling).setOnClickListener(this);
         findViewById(R.id.btn_retry).setOnClickListener(this);
         findViewById(R.id.btn_events_nested).setOnClickListener(this);
+        findViewById(R.id.btn_merge_data).setOnClickListener(this);
     }
 
     @Override
@@ -45,6 +47,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btn_events_nested:
                 EventsNested.eventsNested();
+                break;
+
+            case R.id.btn_merge_data:
+//                MergeMoreData.mergeMoreDatas();
+                MergeMoreData.mergeDataByZip();
                 break;
             default:
                 break;

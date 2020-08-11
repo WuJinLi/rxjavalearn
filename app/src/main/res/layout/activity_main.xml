@@ -7,35 +7,39 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-   <Button
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:id="@+id/btn_simple_to_use"
-       android:text="simpleToUse"
-       android:textAllCaps="false"
-       />
+    <Button
+        android:id="@+id/btn_simple_to_use"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="simpleToUse"
+        android:textAllCaps="false" />
 
-   <Button
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:id="@+id/btn_polling"
-       android:text="polling"
-       android:textAllCaps="false"
-       />
+    <Button
+        android:id="@+id/btn_polling"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="polling"
+        android:textAllCaps="false" />
 
-   <Button
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:id="@+id/btn_retry"
-       android:text="retry"
-       android:textAllCaps="false"
-       />
+    <Button
+        android:id="@+id/btn_retry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="retry"
+        android:textAllCaps="false" />
 
-   <Button
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:id="@+id/btn_events_nested"
-       android:text="events_nested"
-       android:textAllCaps="false"
-       />
+    <Button
+        android:id="@+id/btn_events_nested"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="events_nested"
+        android:textAllCaps="false" />
+
+
+    <Button
+        android:id="@+id/btn_merge_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="merge_data"
+        android:textAllCaps="false" />
 </LinearLayout>
