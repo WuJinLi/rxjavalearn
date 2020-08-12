@@ -12,6 +12,7 @@ import com.wjl.rxjavalearn.combine.RxjavaCombineLatestActivity;
 import com.wjl.rxjavalearn.lenovosearch.LenovoSearchActivity;
 import com.wjl.rxjavalearn.logd.LogForRxjavaUtils;
 import com.wjl.rxjavalearn.mergedatas.MergeMoreData;
+import com.wjl.rxjavalearn.observablecreate.ObservableCreateLearn;
 import com.wjl.rxjavalearn.polling.RxjavaPollingLearn;
 import com.wjl.rxjavalearn.retrywhen.RxjavaRetryWhenLearn;
 import com.wjl.rxjavalearn.simpletouse.SimpleToUseRxjava;
@@ -19,7 +20,6 @@ import com.wjl.rxjavalearn.simpletouse.SimpleToUseRxjava;
 import com.wjl.rxjavalearn.flatmap.EventsNested;
 import com.wjl.rxjavalearn.threadchange.ThreadExchangeByRxjava;
 
-import java.sql.Time;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observer;
@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btn_combine).setOnClickListener(this);
         findViewById(R.id.btn_thread_exchange).setOnClickListener(this);
         findViewById(R.id.btn_lenovo_search).setOnClickListener(this);
+        findViewById(R.id.btn_observable_create).setOnClickListener(this);
         btn_clickfast = findViewById(R.id.btn_clickfast);
         btn_clickfast.setOnClickListener(this);
     }
@@ -109,6 +110,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btn_lenovo_search:
                 startActivity(new Intent(MainActivity.this, LenovoSearchActivity.class));
+                break;
+
+            case R.id.btn_observable_create:
+//                ObservableCreateLearn.createObservableByCreateMethod();
+//                ObservableCreateLearn.quickCreateObservableByJustMethod();
+//                ObservableCreateLearn.quickCreateObservableByFromArrayMethod();
+//                ObservableCreateLearn.quickCreateObservableByFromIterableMethod();
+//                ObservableCreateLearn.quickCreateObservableByEmptyMethod();
+//                ObservableCreateLearn.quickCreateObservableByErrorMethod();
+                ObservableCreateLearn.quickCreateObservableByNeverMethod();
                 break;
             default:
                 break;
