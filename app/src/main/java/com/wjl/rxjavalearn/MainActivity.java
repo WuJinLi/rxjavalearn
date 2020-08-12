@@ -119,7 +119,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                ObservableCreateLearn.quickCreateObservableByFromIterableMethod();
 //                ObservableCreateLearn.quickCreateObservableByEmptyMethod();
 //                ObservableCreateLearn.quickCreateObservableByErrorMethod();
-                ObservableCreateLearn.quickCreateObservableByNeverMethod();
+//                ObservableCreateLearn.quickCreateObservableByNeverMethod();
+                ObservableCreateLearn.delayCreateObservableByDeferMethod();
                 break;
             default:
                 break;

@@ -5,10 +5,12 @@ import com.wjl.rxjavalearn.logd.LogForRxjavaUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
@@ -18,7 +20,7 @@ import io.reactivex.disposables.Disposable;
  * Desc:
  */
 public class ObservableCreateLearn {
-
+    static String content = "第一次赋值";
 
     /**
      * 基本创建方法create()
@@ -236,6 +238,40 @@ public class ObservableCreateLearn {
             public void onError(Throwable e) {
                 LogForRxjavaUtils.LogD(e.toString());
                 e.printStackTrace();
+            }
+
+            @Override
+            public void onComplete() {
+                LogForRxjavaUtils.LogD("onComplete");
+            }
+        });
+    }
+
+    public static void delayCreateObservableByDeferMethod() {
+
+        Observable<String> observable = Observable.defer(new Callable<ObservableSource<? extends String>>() {
+            @Override
+            public ObservableSource<? extends String> call() throws Exception {
+                return Observable.just(content);
+            }
+        });
+
+        content = "第二次赋值";
+
+        observable.subscribe(new Observer<String>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                LogForRxjavaUtils.LogD("开始采用subscribe连接");
+            }
+
+            @Override
+            public void onNext(String value) {
+                LogForRxjavaUtils.LogD("observable发送的事件：" + value);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                LogForRxjavaUtils.LogD(e.toString());
             }
 
             @Override
