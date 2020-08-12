@@ -215,6 +215,11 @@ public class ObservableCreateLearn {
     }
 
 
+    /**
+     * <-- never()  -->
+     * // 该方法创建的被观察者对象发送事件的特点：不发送任何事件
+     * // 即观察者接收后什么都不调用
+     */
     public static void quickCreateObservableByNeverMethod() {
         Observable.never().subscribe(new Observer<Object>() {
             @Override
