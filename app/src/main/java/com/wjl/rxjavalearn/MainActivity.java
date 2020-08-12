@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.wjl.rxjavalearn.combine.RxjavaCombineLatestActivity;
+import com.wjl.rxjavalearn.lenovosearch.LenovoSearchActivity;
 import com.wjl.rxjavalearn.logd.LogForRxjavaUtils;
 import com.wjl.rxjavalearn.mergedatas.MergeMoreData;
 import com.wjl.rxjavalearn.polling.RxjavaPollingLearn;
@@ -42,7 +43,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btn_merge_data).setOnClickListener(this);
         findViewById(R.id.btn_combine).setOnClickListener(this);
         findViewById(R.id.btn_thread_exchange).setOnClickListener(this);
-        btn_clickfast=findViewById(R.id.btn_clickfast);
+        findViewById(R.id.btn_lenovo_search).setOnClickListener(this);
+        btn_clickfast = findViewById(R.id.btn_clickfast);
         btn_clickfast.setOnClickListener(this);
     }
 
@@ -103,6 +105,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                             }
                         });
+                break;
+
+            case R.id.btn_lenovo_search:
+                startActivity(new Intent(MainActivity.this, LenovoSearchActivity.class));
                 break;
             default:
                 break;
