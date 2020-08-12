@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
+import com.jakewharton.rxbinding2.view.RxView;
 import com.wjl.rxjavalearn.combine.RxjavaCombineLatestActivity;
+import com.wjl.rxjavalearn.logd.LogForRxjavaUtils;
 import com.wjl.rxjavalearn.mergedatas.MergeMoreData;
 import com.wjl.rxjavalearn.polling.RxjavaPollingLearn;
 import com.wjl.rxjavalearn.retrywhen.RxjavaRetryWhenLearn;
@@ -15,7 +18,14 @@ import com.wjl.rxjavalearn.simpletouse.SimpleToUseRxjava;
 import com.wjl.rxjavalearn.flatmap.EventsNested;
 import com.wjl.rxjavalearn.threadchange.ThreadExchangeByRxjava;
 
+import java.sql.Time;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private Button btn_clickfast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btn_merge_data).setOnClickListener(this);
         findViewById(R.id.btn_combine).setOnClickListener(this);
         findViewById(R.id.btn_thread_exchange).setOnClickListener(this);
+        btn_clickfast=findViewById(R.id.btn_clickfast);
+        btn_clickfast.setOnClickListener(this);
     }
 
     @Override
@@ -63,7 +75,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btn_thread_exchange:
-                ThreadExchangeByRxjava.threadExchangeofDefaulThreadIn();
+//                ThreadExchangeByRxjava.threadExchangeofDefaulThreadIn();
+                ThreadExchangeByRxjava.threadExchangeOfAssignThread();
+                break;
+
+            case R.id.btn_clickfast:
+                RxView.clicks(btn_clickfast)
+                        .throttleLast(2, TimeUnit.SECONDS)
+                        .subscribe(new Observer<Object>() {
+                            @Override
+                            public void onSubscribe(Disposable d) {
+
+                            }
+
+                            @Override
+                            public void onNext(Object value) {
+                                LogForRxjavaUtils.LogD("点击事件出发");
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                LogForRxjavaUtils.LogD(e.toString());
+                            }
+
+                            @Override
+                            public void onComplete() {
+
+                            }
+                        });
                 break;
             default:
                 break;
