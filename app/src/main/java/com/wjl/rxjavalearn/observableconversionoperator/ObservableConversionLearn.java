@@ -9,6 +9,8 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 
@@ -135,6 +137,45 @@ public class ObservableConversionLearn {
                     @Override
                     public void accept(String s) throws Exception {
                         LogForRxjavaUtils.LogD(s);
+                    }
+                });
+    }
+
+    /**
+     * Buffer
+     * <p>
+     * 定期从 被观察者（Obervable）需要发送的事件中 获取一定数量的事件 & 放到缓存区中，最终发送
+     */
+    public static void operatorOfBuffer() {
+        Observable
+                .just(1, 2, 3, 4, 5)
+                .buffer(3, 2)
+                // 设置缓存区大小 & 步长
+                // 缓存区大小 = 每次从被观察者中获取的事件数量 3
+                // 步长 = 每次获取新事件的数量 2
+                .subscribe(new Observer<List<Integer>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        LogForRxjavaUtils.LogD("onSubscribe");
+                    }
+
+                    @Override
+                    public void onNext(List<Integer> value) {
+                        LogForRxjavaUtils.LogD("缓存区里的事件数量 =" + value.size());
+                        for (Integer in : value) {
+                            LogForRxjavaUtils.LogD("事件=" + in);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        LogForRxjavaUtils.LogD(e.toString());
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        LogForRxjavaUtils.LogD("onComplete");
                     }
                 });
     }

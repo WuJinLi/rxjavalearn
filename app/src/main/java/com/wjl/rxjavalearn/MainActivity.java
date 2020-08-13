@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
             case R.id.btn_observable_conversion:
-                ObservableConversionLearn.operatorOfConcatMap();
+                ObservableConversionLearn.operatorOfBuffer();
                 break;
             default:
                 break;
