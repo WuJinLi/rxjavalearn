@@ -1,4 +1,4 @@
-package com.wjl.rxjavalearn.observablecreate;
+package com.wjl.rxjavalearn.observablecreateoperator;
 
 
 import com.wjl.rxjavalearn.logd.LogForRxjavaUtils;
@@ -18,7 +18,7 @@ import io.reactivex.disposables.Disposable;
 /**
  * Author: wujinli
  * CreateDate: 2020/8/12  16:12
- * Desc:
+ * Desc: Observable创建操作符
  */
 public class ObservableCreateLearn {
     static String content = "第一次赋值";

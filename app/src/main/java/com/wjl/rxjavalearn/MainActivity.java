@@ -12,7 +12,8 @@ import com.wjl.rxjavalearn.combine.RxjavaCombineLatestActivity;
 import com.wjl.rxjavalearn.lenovosearch.LenovoSearchActivity;
 import com.wjl.rxjavalearn.logd.LogForRxjavaUtils;
 import com.wjl.rxjavalearn.mergedatas.MergeMoreData;
-import com.wjl.rxjavalearn.observablecreate.ObservableCreateLearn;
+import com.wjl.rxjavalearn.observableconversionoperator.ObservableConversionLearn;
+import com.wjl.rxjavalearn.observablecreateoperator.ObservableCreateLearn;
 import com.wjl.rxjavalearn.polling.RxjavaPollingLearn;
 import com.wjl.rxjavalearn.retrywhen.RxjavaRetryWhenLearn;
 import com.wjl.rxjavalearn.simpletouse.SimpleToUseRxjava;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btn_thread_exchange).setOnClickListener(this);
         findViewById(R.id.btn_lenovo_search).setOnClickListener(this);
         findViewById(R.id.btn_observable_create).setOnClickListener(this);
+        findViewById(R.id.btn_observable_conversion).setOnClickListener(this);
         btn_clickfast = findViewById(R.id.btn_clickfast);
         btn_clickfast.setOnClickListener(this);
     }
@@ -53,11 +55,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_simple_to_use:
-//                SimpleToUseRxjava.simpleToUseRxjava();
                 SimpleToUseRxjava.chainCalls();
                 break;
             case R.id.btn_polling:
-//                RxjavaPollingLearn.unconditionalPolling();
                 RxjavaPollingLearn.conditionalPolling();
                 break;
 
@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btn_merge_data:
-//                MergeMoreData.mergeMoreDatas();
                 MergeMoreData.mergeDataByZip();
                 break;
             case R.id.btn_combine:
@@ -78,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btn_thread_exchange:
-//                ThreadExchangeByRxjava.threadExchangeofDefaulThreadIn();
                 ThreadExchangeByRxjava.threadExchangeOfAssignThread();
                 break;
 
@@ -114,6 +112,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btn_observable_create:
                 ObservableCreateLearn.delayCreateObservableByRangeLongMethod();
+                break;
+
+
+            case R.id.btn_observable_conversion:
+                ObservableConversionLearn.operatorOfConcatMap();
                 break;
             default:
                 break;
