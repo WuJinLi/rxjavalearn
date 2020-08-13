@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.jakewharton.rxbinding2.view.RxView;
+import com.wjl.rxjavalearn.combinationormergeopterator.ObservableCombinationMergeOpterator;
 import com.wjl.rxjavalearn.combine.RxjavaCombineLatestActivity;
 import com.wjl.rxjavalearn.lenovosearch.LenovoSearchActivity;
 import com.wjl.rxjavalearn.logd.LogForRxjavaUtils;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btn_combine).setOnClickListener(this);
         findViewById(R.id.btn_thread_exchange).setOnClickListener(this);
         findViewById(R.id.btn_lenovo_search).setOnClickListener(this);
+        findViewById(R.id.btn_combination_and_merge_opterator).setOnClickListener(this);
         findViewById(R.id.btn_observable_create).setOnClickListener(this);
         findViewById(R.id.btn_observable_conversion).setOnClickListener(this);
         btn_clickfast = findViewById(R.id.btn_clickfast);
@@ -114,9 +116,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ObservableCreateLearn.delayCreateObservableByRangeLongMethod();
                 break;
 
-
             case R.id.btn_observable_conversion:
                 ObservableConversionLearn.operatorOfBuffer();
+                break;
+
+            case R.id.btn_combination_and_merge_opterator:
+                ObservableCombinationMergeOpterator.ObservableZip();
                 break;
             default:
                 break;

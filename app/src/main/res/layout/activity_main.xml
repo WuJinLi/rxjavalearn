@@ -50,6 +50,7 @@
         android:layout_height="wrap_content"
         android:text="combine"
         android:textAllCaps="false" />
+
     <Button
         android:id="@+id/btn_thread_exchange"
         android:layout_width="match_parent"
@@ -76,13 +77,20 @@
         android:id="@+id/btn_observable_create"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="observable_create"
+        android:text="Observable的创建"
         android:textAllCaps="false" />
 
     <Button
         android:id="@+id/btn_observable_conversion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="observable_conversion"
+        android:text="变换操作符"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_combination_and_merge_opterator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="组合合并操作符"
         android:textAllCaps="false" />
 </LinearLayout>
