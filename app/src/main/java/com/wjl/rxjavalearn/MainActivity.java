@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btn_combination_and_merge_opterator:
-                ObservableCombinationMergeOpterator.ObservableZip();
+                ObservableCombinationMergeOpterator.operatorCount();
                 break;
             default:
                 break;

@@ -2,6 +2,8 @@ package com.wjl.rxjavalearn.combinationormergeopterator;
 
 import com.wjl.rxjavalearn.logd.LogForRxjavaUtils;
 
+import java.util.ArrayList;
+import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -9,13 +11,15 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.BiConsumer;
 import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
  * Author: wujinli
  * CreateDate: 2020/8/13  16:32
- * Desc: 组合合并操作符
+ * Desc: 组合/合并操作符
  */
 public class ObservableCombinationMergeOpterator {
 
@@ -245,4 +249,186 @@ public class ObservableCombinationMergeOpterator {
             }
         });
     }
+
+
+    /**
+     * combineLatest（）
+     * 当两个Observables中的任何一个发送了数据后，将先发送了数据的Observables 的最新（最后）一个数据 与 另外一个Observable发送的每个数据结合，最终基于该函数的结果发送数据
+     * 与Zip（）的区别：Zip（） = 按个数合并，即1对1合并；CombineLatest（） = 按时间合并，即在同一个时间点上合并
+     */
+    public static void operatorCombineLatest() {
+        Observable.combineLatest(Observable.just(1l, 2l, 3l),
+                Observable.intervalRange(0, 3, 1, 1, TimeUnit.SECONDS),
+                new BiFunction<Long, Long, Long>() {
+                    @Override
+                    public Long apply(Long aLong, Long aLong2) throws Exception {
+                        // aLong = 第1个Observable发送的最新（最后）1个数据
+                        // aLong2 = 第2个Observable发送的每1个数据
+                        LogForRxjavaUtils.LogD("合并的数据是： " + aLong + " " + aLong2);
+                        return aLong + aLong2;
+                    }
+                }
+        ).subscribe(new Observer<Long>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                LogForRxjavaUtils.LogD("onSubscribe");
+            }
+
+            @Override
+            public void onNext(Long value) {
+                LogForRxjavaUtils.LogD("合并的结果是： " + value);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                LogForRxjavaUtils.LogD(e.toString());
+            }
+
+            @Override
+            public void onComplete() {
+                LogForRxjavaUtils.LogD("onComplete");
+            }
+        });
+
+
+    }
+
+    /**
+     * reduce（）
+     * 把被观察者需要发送的事件聚合成1个事件 & 发送
+     */
+    public static void operatorReduce() {
+        Observable.just(1, 2, 3, 4)
+                .reduce(new BiFunction<Integer, Integer, Integer>() {
+                    @Override
+                    public Integer apply(Integer integer, Integer integer2) throws Exception {
+                        LogForRxjavaUtils.LogD("本次操作的数据是" + integer + "," + integer2);
+                        return integer * integer2;
+                    }
+                }).subscribe(new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) throws Exception {
+                LogForRxjavaUtils.LogD("使用reduce操作符输出结果 " + integer);
+            }
+        });
+    }
+
+    /**
+     * collect（）
+     * 将被观察者Observable发送的数据事件收集到一个数据结构里
+     */
+    public static void operatorCollect() {
+//        Observable.just(1, 2, 3, 4, 5, 6)
+//                .collect(new Callable<ArrayList<Integer>>() {
+//                    @Override
+//                    public ArrayList<Integer> call() throws Exception {
+//                        return new ArrayList<>();
+//                    }
+//                }, new BiConsumer<ArrayList<Integer>, Integer>() {
+//                    @Override
+//                    public void accept(ArrayList<Integer> integers, Integer integer) throws Exception {
+//                        integers.add(integer);
+//                    }
+//                }).subscribe(new Consumer<ArrayList<Integer>>() {
+//            @Override
+//            public void accept(ArrayList<Integer> integers) throws Exception {
+//                LogForRxjavaUtils.LogD("本次接收数据" + integers);
+//            }
+//        });
+
+
+        Observable.just(1, 2, 3, 4)
+                .collect(new Callable<StringBuilder>() {
+
+                    @Override
+                    public StringBuilder call() throws Exception {
+                        return new StringBuilder();
+                    }
+                }, new BiConsumer<StringBuilder, Integer>() {
+                    @Override
+                    public void accept(StringBuilder stringBuilder, Integer integer) throws Exception {
+                        stringBuilder.append(integer);
+                    }
+                }).subscribe(new Consumer<StringBuilder>() {
+            @Override
+            public void accept(StringBuilder stringBuilder) throws Exception {
+                LogForRxjavaUtils.LogD(stringBuilder.toString());
+            }
+        });
+
+    }
+
+
+    /**
+     * 发送事件前追加发送事件
+     * startWith（） / startWithArray（）
+     * 在一个被观察者发送事件前，追加发送一些数据 / 一个新的被观察者
+     */
+    public static void operatorStartWith() {
+//        Observable.just(1,2,3,4)
+//                .startWith(0)
+//                .startWithArray(5,6,7,8)
+//                .subscribe(new Observer<Integer>() {
+//                    @Override
+//                    public void onSubscribe(Disposable d) {
+//                        LogForRxjavaUtils.LogD("onSubscribe");
+//                    }
+//
+//                    @Override
+//                    public void onNext(Integer value) {
+//                        LogForRxjavaUtils.LogD("接收的数据"+value);
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        LogForRxjavaUtils.LogD(e.toString());
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//                        LogForRxjavaUtils.LogD("onComplete");
+//                    }
+//                });
+
+        Observable.just(123)
+                .startWith(Observable.just(333))
+                .subscribe(new Observer<Integer>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        LogForRxjavaUtils.LogD("onSubscribe");
+                    }
+
+                    @Override
+                    public void onNext(Integer value) {
+                        LogForRxjavaUtils.LogD("接收数据：" + value);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        LogForRxjavaUtils.LogD(e.toString());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        LogForRxjavaUtils.LogD("onComplete");
+                    }
+                });
+    }
+
+
+    /**
+     * count（）
+     * 统计被观察者发送事件的数量
+     */
+    public static void operatorCount() {
+        Observable.just(1, 2, 3, 4, 5, 6)
+                .count()
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        LogForRxjavaUtils.LogD("统计个数:" + aLong);
+                    }
+                });
+    }
+
 }
